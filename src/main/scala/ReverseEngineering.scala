@@ -5,7 +5,7 @@ object ReverseEngineering extends App {
   val spark = SparkSession
     .builder()
     .master("local[*]")
-    .appName("MostImportantRows")
+    .appName("ReverseEngineering")
     .config("spark.some.config.option", "some-value")
     .getOrCreate()
 
@@ -25,5 +25,11 @@ object ReverseEngineering extends App {
         .map(a => readCSV(a)): _*
     )
   }
+
+  val path = if (args.length > 0) args(0) else "text.csv"
+
+  val solution = output(path)
+
+  solution.show
 
 }
