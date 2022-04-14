@@ -9,7 +9,16 @@ object ReverseEngineering extends App {
     .config("spark.some.config.option", "some-value")
     .getOrCreate()
 
-  import spark.implicits._
-  import org.apache.spark.sql.functions._
+  def output(file: String) = {
+
+    val readCSV = spark.read
+      .option("header", value = true)
+      .option("inferSchema", value = true)
+      .option("delimiter", "|")
+      .option("ignoreLeadingWhiteSpace", value = true)
+      .option("comment", "+")
+      .csv(file)
+
+  }
 
 }
