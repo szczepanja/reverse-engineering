@@ -19,6 +19,11 @@ object ReverseEngineering extends App {
       .option("comment", "+")
       .csv(file)
 
+    readCSV.select(
+      readCSV.columns
+        .filterNot(f => f.startsWith("_c"))
+        .map(a => readCSV(a)): _*
+    )
   }
 
 }
